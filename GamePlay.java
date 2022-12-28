@@ -11,7 +11,7 @@ import java.util.Random;
  * */
 public class GamePlay {
 
-	private static int threadNum;
+	public final int MAX_ROUNDS = 6;
 
 	private boolean coin_available; // Is the coin available?
 	private int roundsCounter; // Number of passed rounds
@@ -31,39 +31,30 @@ public class GamePlay {
 			notifyAll();
 	}
 
-	public boolean flipCoin() {
+	public synchronized boolean flipCoin() {
 		try {
-			System.out.println(threadNum + " is waiting for a coin ");
+			System.out.println(Thread.currentThread().getName() + " is waiting for a coin ");
 			wait();
 		} catch (InterruptedException e) {
 		}
 
 		int current_num;
 		synchronized (this) {
-			System.out.println(threadNum + " is flipping a coin ");
-			judge_thread.interrupt();
+			System.out.println(Thread.currentThread().getName() + " is flipping a coin ");
 			makeCoinAvail(false);
 			roundsCounter++;
 			Random rnd = new Random();
 			current_num = rnd.nextInt(10) % 2;
 			makeCoinAvail(true);
-			judge_thread = new Thread(judge);
-			judge_thread.start();
 			notifyAll();
 		}
-		System.out.println(threadNum++ + " is dead");
 		return current_num == 0 ? false : true;
 	}
 	
 
-
 	// Returns the current number of rounds
 	public synchronized int getNumOfRounds() {
 		return roundsCounter;
-	}
-
-	public synchronized boolean getAvail() {
-		return this.coin_available;
 	}
 
 }

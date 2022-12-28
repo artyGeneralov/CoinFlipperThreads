@@ -9,7 +9,7 @@ package assig3_1;
 public class Gamer implements Runnable {
 	
 	private final long SLEEP_TIME = 1000;
-	private final int MAX_FLIPS = 10;
+	private final int MAX_FLIPS;
 	
 	private int goodFlipsCounter; // Score
 	private int flipCounter; // How many flips ( 10 max!! )
@@ -17,6 +17,7 @@ public class Gamer implements Runnable {
 	
 	public Gamer(GamePlay gp) {
 		this.gp = gp;
+		MAX_FLIPS = gp.MAX_ROUNDS / 2;
 	}
 	
 	
@@ -33,7 +34,7 @@ public class Gamer implements Runnable {
 			if(result == true)
 				goodFlipsCounter++;
 			
-			System.out.println(result);
+			//System.out.println(result);
 			}
 			flipCounter++;
 			try {

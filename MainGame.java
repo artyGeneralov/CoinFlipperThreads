@@ -24,10 +24,10 @@ public class MainGame {
 		while(gamer_1_thread.isAlive() || gamer_2_thread.isAlive()) {
 		}
 		if(gamer_1.getScore() > gamer_2.getScore())
-			System.out.println("Player 1 wins");
-		else if (gamer_1.getScore() > gamer_2.getScore())
-			System.out.println("Player 2 wins");
+			System.out.println("Player 1 wins " + gamer_1.getScore() + ":" + gamer_2.getScore());
+		else if (gamer_1.getScore() < gamer_2.getScore())
+			System.out.println("Player 2 wins " + gamer_1.getScore() + ":" + gamer_2.getScore());
 		else
-			System.out.println("Tie");
+			System.out.println("Tie " + gamer_1.getScore() + " : " + gamer_2.getScore());
 	}
 }

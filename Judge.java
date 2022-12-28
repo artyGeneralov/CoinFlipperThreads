@@ -18,7 +18,7 @@ public class Judge implements Runnable {
 	}
 
 	public void run() {
-			while (gp.getNumOfRounds() < 19 && !Thread.interrupted()) {
+			while (gp.getNumOfRounds() < gp.MAX_ROUNDS && !Thread.interrupted()) {
 				try {
 					Thread.sleep(TIME_TO_SLEEP); // sleep
 				} catch (InterruptedException e) {}
