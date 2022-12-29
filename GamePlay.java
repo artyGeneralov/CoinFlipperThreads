@@ -31,12 +31,21 @@ public class GamePlay {
 			notifyAll();
 	}
 
-	public synchronized boolean flipCoin() {
-		try {
-			System.out.println(Thread.currentThread().getName() + " is waiting for a coin ");
-			wait();
-		} catch (InterruptedException e) {
+	
+	public boolean flipCoin() {
+		while(!coin_available) {
+			try {
+				System.out.println(Thread.currentThread().getName() + " is waiting for a coin ");
+				wait();
+			} catch (InterruptedException e) {
+			}
 		}
+		/*
+		 * @PRE - coin_available = true
+		 * @POST - return 1 or 0
+		 * @INV - roundsCounter = number of times this method was called and the coin was available
+		 * 		  coin_available = true
+		 * */
 
 		int current_num;
 		synchronized (this) {
